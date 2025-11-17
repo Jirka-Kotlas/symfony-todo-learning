@@ -78,4 +78,16 @@ final class TaskController extends AbstractController
 
         return $this->redirectToRoute('app_task_index', [], Response::HTTP_SEE_OTHER);
     }
+    #[Route('/task/{id}/toggle', name: 'app_task_toggle', methods: ['POST'])]
+    public function toggle(Task $task, \Doctrine\ORM\EntityManagerInterface $entityManager): \Symfony\Component\HttpFoundation\Response
+    {
+        // Přepne hodnotu isCompleted (pokud je true, bude false a naopak)
+        $task->setIsCompleted(!$task->isCompleted());
+
+        // Uloží změny do databáze
+        $entityManager->flush();
+
+        // Přesměruje uživatele zpět na seznam úkolů
+        return $this->redirectToRoute('app_task_index');
+    }
 }

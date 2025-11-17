@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Task{% endblock %}
+{% block title %}Úkol{% endblock %}
 
 {% block body %}
-    <h1>Task</h1>
+    <h1>Úkol</h1>
 
     <table class="table">
         <tbody>
@@ -12,27 +12,25 @@
                 <td>{{ task.id }}</td>
             </tr>
             <tr>
-                <th>Title</th>
+                <th>Název</th>
                 <td>{{ task.title }}</td>
             </tr>
             <tr>
-                <th>Description</th>
+                <th>Popis</th>
                 <td>{{ task.description }}</td>
             </tr>
             <tr>
-                <th>IsCompleted</th>
-                <td>{{ task.isCompleted ? 'Yes' : 'No' }}</td>
+                <th>Dokončeno</th>
+                <td>{{ task.isCompleted ? 'Ano' : 'Ne' }}</td>
             </tr>
             <tr>
-                <th>CreatedAt</th>
-                <td>{{ task.createdAt ? task.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <th>Vytvořeno</th>
+                <td>{{ task.createdAt ? task.createdAt|date('d.m.Y H:i:s') : '' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_task_index') }}">back to list</a>
-
-    <a href="{{ path('app_task_edit', {'id': task.id}) }}">edit</a>
-
+    <a href="{{ path('app_task_index') }}" class="btn btn-secondary">Zpět na seznam</a>
+    <a href="{{ path('app_task_edit', {'id': task.id}) }}" class="btn btn-warning">Upravit</a>
     {{ include('task/_delete_form.html.twig') }}
 {% endblock %}
