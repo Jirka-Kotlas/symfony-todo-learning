@@ -26,9 +26,11 @@
                 <td>{{ task.isCompleted ? 'Ano' : 'Ne' }}</td>
                 <td>{{ task.createdAt ? task.createdAt|date('d.m.Y H:i:s') : '' }}</td>
                 <td>
-                    <form method="post" action="{{ path('app_task_toggle', {'id': task.id}) }}" style="display: inline-block;">
-                        <button class="btn btn-sm {{ task.isCompleted ? 'btn-secondary' : 'btn-success' }}">
-                            {{ task.isCompleted ? 'Vrátit zpět' : 'Označit jako hotovo' }}
+                    {# Tlačítko Toggle #}
+                    <form method="post" action="{{ path('app_task_toggle', {'id': task.id}) }}" style="display: inline-block">
+                        <input type="hidden" name="_token" value="{{ csrf_token('toggle' ~ task.id) }}">
+                        <button type="submit" class="btn btn-sm {{ task.isCompleted ? 'btn-success' : 'btn-outline-secondary' }}">
+                            {{ task.isCompleted ? 'Hotovo ✅' : 'Dokončit' }}
                         </button>
                     </form>
                 </td>
@@ -44,6 +46,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_task_new') }}" class="btn btn-primary">Vytvořit nový úkol</a>
 {% endblock %}

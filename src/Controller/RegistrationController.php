@@ -34,6 +34,9 @@ class RegistrationController extends AbstractController
 
             // do anything else you need here, like send an email
 
+            $this->addFlash('success', 'Registrace proběhla úspěšně. Nyní se prosím přihlašte.');
+            return $this->redirectToRoute('app_login');
+
             return $security->login($user, LoginFormAuthenticator::class, 'main');
         }
 
