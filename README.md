@@ -26,7 +26,15 @@ Tento příkaz spustí:
 - **PostgreSQL databázi** na portu `5433`
 - **Symfony aplikaci** na portu `8000`
 
-### 3. Vytvoření databázové struktury
+### 3. Instalace závislostí
+
+Aby byly nainstalovány všechny PHP knihovny (které se nemusí správně načíst kvůli Docker volumes), spusťte:
+
+```bash
+docker-compose exec app composer install
+```
+
+### 4. Vytvoření databázové struktury
 
 Po spuštění kontejnerů je nutné vytvořit databázové tabulky:
 
@@ -36,7 +44,7 @@ docker-compose exec app php bin/console doctrine:migrations:migrate
 
 Potvrďte migraci zadáním `yes`.
 
-### 4. Přístup k aplikaci
+### 5. Přístup k aplikaci
 
 Aplikace bude dostupná na: **http://localhost:8000**
 
