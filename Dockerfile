@@ -20,6 +20,9 @@ RUN composer install --no-scripts --no-autoloader
 # Copy the rest of the application
 COPY . .
 
+# Ensure var directory exists (in case it was not copied)
+RUN mkdir -p /app/var
+
 # Complete composer install with scripts and autoloader
 RUN composer dump-autoload --optimize
 
