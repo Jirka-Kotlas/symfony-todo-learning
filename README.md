@@ -26,12 +26,21 @@ Tento příkaz spustí:
 - **PostgreSQL databázi** na portu `5433`
 - **Symfony aplikaci** na portu `8000`
 
-### 3. Instalace závislostí
+### 3. Instalace závislostí a příprava prostředí
 
-Aby byly nainstalovány všechny PHP knihovny (které se nemusí správně načíst kvůli Docker volumes), spusťte:
+Aby aplikace správně fungovala, je potřeba nainstalovat závislosti a připravit soubory, které nejsou v repozitáři (jsou v `.gitignore`).
+
+Spusťte následující příkazy:
 
 ```bash
+# 1. Instalace PHP knihoven (vytvoří složku /vendor)
 docker-compose exec app composer install
+
+# 2. Instalace assetů (vytvoří složku /public/bundles)
+docker-compose exec app php bin/console assets:install
+
+# 3. Vyčištění cache (vytvoří/obnoví složku /var)
+docker-compose exec app php bin/console cache:clear
 ```
 
 ### 4. Vytvoření databázové struktury
